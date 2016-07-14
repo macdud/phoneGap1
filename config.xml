@@ -28,10 +28,7 @@
     <splash src="res/screen/android/test.png" density="port-ldpi"/>
     <splash src="res/screen/android/test.png" density="port-mdpi"/>
     <splash src="res/screen/android/test.png" density="port-xhdpi"/>
-	
-	</platform>
-
-    <icon src="res/icon.png" />
+	   <icon src="res/icon.png" />
     <!--
       If you do not want any permissions to be added to your app, add the
       following tag to your config.xml; you will still have the INTERNET
@@ -52,4 +49,7 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>
 	
 	<gap:plugin name="org.apache.cordova.geolocation" />
+	</platform>
+
+ 
 </widget>

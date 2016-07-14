@@ -1,50 +1,99 @@
-	<?xml version="1.0" encoding="UTF-8" ?>
-    <widget xmlns   = "http://www.w3.org/ns/widgets"
-        xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.phonegap.example"
-        versionCode = "10" 
-        version     = "1.0.0" >
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0">
 
-    <!-- versionCode is optional and Android only -->
+<name>Hello World</name>
 
-    <name>PhoneGap Example</name>
+<description>A sample PhoneGap application.</description>
 
-    <description>
-        An example for phonegap build docs. 
-    </description>
+<author email="support@phonegap.com" href="http://phonegap.com"> PhoneGap Team</author>
 
-    <author href="https://build.phonegap.com" email="support@phonegap.com">
-        Maciej Dudzinski
-    </author>
-	
-	<platform name="android">
-    <!-- you can use any density that exists in the Android project -->
-    <splash src="res/screen/android/test.png" density="land-hdpi"/>
-    <splash src="res/screen/android/test.png" density="land-ldpi"/>
-    <splash src="res/screen/android/test.png" density="land-mdpi"/>
-    <splash src="res/screen/android/test.png" density="land-xhdpi"/>
+<content src="index.html"/>
 
-    <splash src="res/screen/android/test.png" density="port-hdpi"/>
-    <splash src="res/screen/android/test.png" density="port-ldpi"/>
-    <splash src="res/screen/android/test.png" density="port-mdpi"/>
-    <splash src="res/screen/android/test.png" density="port-xhdpi"/>
-	   <icon src="res/icon.png" />
-    <!--
-      If you do not want any permissions to be added to your app, add the
-      following tag to your config.xml; you will still have the INTERNET
-      permission on your app, which PhoneGap requires.
-    -->
-	
-    <!-- to enable individual permissions use the following examples -->
-    <feature name="http://api.phonegap.com/1.0/battery"/>
-    <feature name="http://api.phonegap.com/1.0/camera"/>
-    <feature name="http://api.phonegap.com/1.0/contacts"/>
-    <feature name="http://api.phonegap.com/1.0/file"/>
-    <feature name="http://api.phonegap.com/1.0/geolocation"/>
-    <feature name="http://api.phonegap.com/1.0/media"/>
-    <feature name="http://api.phonegap.com/1.0/network"/>
-    <feature name="http://api.phonegap.com/1.0/notification"/>
-	</platform>
+<access origin="*"/>
 
- 
+<platform name="android">
+<!-- a preference specific to android only here -->
+</platform>
+
+<feature name="Device">
+<param name="android-package"
+value="org.apache.cordova.device.Device"
+/>
+</feature>
+
+<!-- Core/Common Preferences -->
+
+
+<preference name="Fullscreen" value="true"/> 
+
+<preference name="DisallowOverscroll" value="true"/> 
+
+<preference name="Orientation" value="landscape"/>
+
+<preference name="HideKeyboardFormAccessoryBar" value="false"/>
+
+<preference name="BackgroundColor" value="0xff0000ff"/>
+
+
+<!--iOS Preferences-->
+
+<preference name="EnableViewportScale" value="true"/> 
+
+<preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+
+<preference name="MediaPlaybackRequiresUserAction" value="true"/>
+
+<preference name="AllowInlineMediaPlayback" value="true"/>
+
+<preference name="BackupWebStorage" value="false"/>
+
+<preference name="SuppressesIncrementalRendering" value="true"/>
+
+<preference name="GapBetweenPages" value="0"/>
+
+<preference name="PageLength" value="0"/>
+
+<preference name="PaginationBreakingMode" value="page"/>
+
+<preference name="PaginationMode" value="unpaginated"/>
+
+<preference name="UIWebViewDecelerationSpeed" value="fast"/>
+
+
+<!--Android Preferences-->
+
+<preference name="KeepRunning" value="false"/> 
+
+<preference name="LoadUrlTimeoutValue" value="10000"/>
+
+<preference name="SplashScreen" value="mySplash"/>
+
+<preference name="SplashScreenDelay" value="10000"/>
+
+<preference name="InAppBrowserStorageEnabled" value="true"/>
+
+<preference name="LoadingDialog" value="My Title,My Message"/>
+
+<preference name="LoadingPageDialog" value="My Title,My Message"/>
+
+<preference name="ErrorUrl" value="myErrorPage.html"/>
+
+<preference name="ShowTitle" value="true"/>
+
+<preference name="LogLevel" value="VERBOSE"/>
+
+<preference name="SetFullscreen" value="false"/>
+
+<preference name="AndroidLaunchMode" value="singleTop"/>
+
+<!--BlackBerry 10 Preferences-->
+
+<preference name="ChildBrowser" value="disable"/> 
+<preference name="PopupBlocker" value="enable""/>
+<preference name="WebSecurity" value="disable"/>
+
+
+<icon src="res/icon.png" platform="ios" width="57" height="57" density="mdpi"> </icon>
+
+<splash src="res/icon.png" platform="ios" width="57" height="57" density="mdpi"> </splash>
+
 </widget>

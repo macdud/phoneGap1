@@ -44,7 +44,7 @@ var app = {
             };
 
             // Start the connection.
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start({ jsonp: true }).done(function () {
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
                     chat.server.send(displayName, $('#message').val());

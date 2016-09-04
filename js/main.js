@@ -46,7 +46,7 @@ var app = {
             };
 
             // Start the connection.
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start({ jsonp: true }).done(function () {
 					alert("connection done");
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
@@ -54,7 +54,9 @@ var app = {
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
-            });
+            }).fail(function(e) {
+				alert('Connection Error ' + e);
+		});
         }
 
 };

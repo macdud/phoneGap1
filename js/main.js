@@ -17,6 +17,7 @@ var app = {
 	 // This optional function html-encodes messages for display in the page.
       
     initialize: function() {
+		alert("loading");
         this.store = new MemoryStore();
 		var   htmlEncode = function(value) {
             var encodedValue = $('<div />').text(value).html();
@@ -26,6 +27,7 @@ var app = {
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
 		  // Reference the auto-generated proxy for the hub.
             $.connection.hub.url = 'http://macdud-001-site1.itempurl.com/signalr/hubs';
+			alert("created connection hub");
             var chat = $.connection.hubClass;
 			var displayName = 'Maciej'; //prompt('Enter your name:', '')
             // Create a function that the hub can call back to display messages.
@@ -44,7 +46,8 @@ var app = {
             };
 
             // Start the connection.
-            $.connection.hub.start({ jsonp: true }).done(function () {
+            $.connection.hub.start().done(function () {
+					alert("connection done");
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
                     chat.server.send(displayName, $('#message').val());

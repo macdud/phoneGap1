@@ -17,7 +17,6 @@ var app = {
 	 // This optional function html-encodes messages for display in the page.
       
     initialize: function() {
-		alert("loading");
         this.store = new MemoryStore();
 		var   htmlEncode = function(value) {
             var encodedValue = $('<div />').text(value).html();
@@ -25,39 +24,28 @@ var app = {
         }
 		
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
-		  // Reference the auto-generated proxy for the hub.
-            $.connection.hub.url = 'http://macdud-001-site1.itempurl.com/signalr/hubs';
-			alert("created connection hub");
-            var chat = $.connection.hubClass;
-			var displayName = 'Maciej'; //prompt('Enter your name:', '')
-            // Create a function that the hub can call back to display messages.
-            chat.client.addNewMessageToPage = function (name, message) {
-                // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
-            };
-            // Get the user name and store it to prepend to messages.
-            $('#displayname').val(displayName); 
-            // Set initial focus to message input box.
-            $('#message').focus();
-
-            chat.client.hello = function (message) {
-                $('#discussion').append('<li><strong>' + htmlEncode(message) + '</li>');
-            };
-
-            // Start the connection.
-            $.connection.hub.start({ jsonp: true }).done(function () {
-					alert("connection done");
-                $('#sendmessage').click(function () {
-                    // Call the Send method on the hub.
-                    chat.server.send(displayName, $('#message').val());
-                    // Clear text box and reset focus for next comment.
-                    $('#message').val('').focus();
-                });
-            }).fail(function(e) {
-				alert('Connection Error ' + e);
-		});
-        }
+		 
+		
+        },
+	loadStuff: function()
+	{
+			$.ajax({
+			url: "http://macdud-001-site1.itempurl.com/api/",
+			cache: false,
+			async: true,
+			success: function(data){
+			  //console.log( "Load was performed. " + data );
+			  $(".employee-list").append("<p>Load was performed. " + data + "</p>");
+			  app.loadStuff();
+				}
+			,error: function()
+			{
+				//console.log( "Error");
+				 $(".employee-list").append("<p>Error</p>");
+				app.loadStuff();
+			}
+			});
+	}
 
 };
 
@@ -65,4 +53,8 @@ var app = {
 
 $( document ).ready(function() {
     app.initialize();
+	app.loadStuff();
+
+
 });
+

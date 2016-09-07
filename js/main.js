@@ -26,17 +26,23 @@ var app = {
         $('.search-key').on('keyup', $.proxy(this.findByName, this));
 		 
 		
-        },
-	loadStuff: function()
+        }
+	
+
+};
+
+function loadStuff()
 	{
 			$.ajax({
 			url: "http://macdud-001-site1.itempurl.com/api/",
 			cache: false,
 			async: true,
+			crossDomain: true,
+            dataType: 'jsonp',
 			success: function(data){
 			  //console.log( "Load was performed. " + data );
 			  $(".employee-list").append("<p>Load was performed. " + data + "</p>");
-			  app.loadStuff();
+					loadStuff();
 				}
 			,error: function(xhr, status, error)
 			{
@@ -47,13 +53,10 @@ var app = {
 			});
 	}
 
-};
-
-
 
 $( document ).ready(function() {
     app.initialize();
-	app.loadStuff();
+		loadStuff();
 
 
 });

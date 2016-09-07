@@ -36,7 +36,7 @@ function loadStuff()
 			$.ajax({
 			url: "http://macdud-001-site1.itempurl.com/api/",
 			cache: false,
-			async: true,
+			async: false,
 			crossDomain: true,
             dataType: 'jsonp',
 			success: function(data){

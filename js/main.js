@@ -34,11 +34,12 @@ var app = {
 function loadStuff()
 	{
 			$.ajax({
-			url: "http://macdud-001-site1.itempurl.com/api/",
+			url: "http://macdud-001-site1.itempurl.com/api",
 			cache: false,
-			async: false,
+			async: true,
 			crossDomain: true,
             dataType: 'jsonp',
+			callback: jCallback(),
 			success: function(data){
 			  //console.log( "Load was performed. " + data );
 			  $(".employee-list").append("<p>Load was performed. " + data + "</p>");
@@ -53,7 +54,10 @@ function loadStuff()
 			});
 	}
 
-
+function jCallback(data)
+{
+	//console.log(data);
+}
 $( document ).ready(function() {
     app.initialize();
 		loadStuff();

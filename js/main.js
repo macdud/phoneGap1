@@ -38,11 +38,11 @@ var app = {
 			  $(".employee-list").append("<p>Load was performed. " + data + "</p>");
 			  app.loadStuff();
 				}
-			,error: function()
+			,error: function(data)
 			{
 				//console.log( "Error");
-				 $(".employee-list").append("<p>Error</p>");
-				app.loadStuff();
+				 $(".employee-list").append("<p>Error" + data + "</p>");
+				//app.loadStuff();
 			}
 			});
 	}

@@ -38,10 +38,10 @@ var app = {
 			  $(".employee-list").append("<p>Load was performed. " + data + "</p>");
 			  app.loadStuff();
 				}
-			,error: function(data)
+			,error: function(xhr, status, error)
 			{
 				//console.log( "Error");
-				 $(".employee-list").append("<p>Error" + data + "</p>");
+				 $(".employee-list").append("<p>Error" + xhr + " / " + status + " / " + error + "</p>");
 				//app.loadStuff();
 			}
 			});

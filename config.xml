@@ -16,7 +16,9 @@
     <author href="http://coenraets.org" email="ccoenraets@gmail.com">
         Christophe Coenraets
     </author>
-	<allow-navigation href="*" />
-    <allow-intent href="*" />
-    <access origin="*" /> <!-- Required for iOS9 -->
+	<access origin="*" />
+	<plugin name="cordova-plugin-whitelist" version="1" />
+    <allow-navigation href="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
 </widget>

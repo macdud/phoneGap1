@@ -7,6 +7,7 @@
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery.mobile-1.4.5.js"></script>
 <link type="text/css" href="css/jquery.mobile-1.4.5.css" rel="stylesheet" />
+<link type="text/css" href="css/myStyles.css" rel="stylesheet" />
 <script src="js/storage/memory-store.js"></script>
 <link rel="stylesheet" href="http://openlayers.org/en/v3.18.2/css/ol.css" type="text/css">
  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
@@ -18,20 +19,49 @@
 
 <a class="skiplink" href="#map">Go to map</a>
 <div id="map" class="map" tabindex="0" style="width:95%;height:500px;margin-left:auto;margin-right:auto;"></div>
-<div class="container-fluid">
 
-<div class="row-fluid">
-  <div class="span12">
-    <div id="map" class="map"><div id="popup"></div></div>
-  </div>
-</div>
-
-</div>
 <button id="zoom-out">Zoom out</button>
 <button id="zoom-in">Zoom in</button>
 
 <div class="someText"></div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">X</span>
+      <h2 class='modal-title'></h2>
+    </div>
+    <div class="modal-body">
+      <p class='modal-text'></p>
+    </div>
+    <div class="modal-footer">
+     <!--  <h3>Modal Footer</h3> -->
+    </div>
+  </div>
+
+</div>
+
+	  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
 
 </body>
 </html>

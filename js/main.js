@@ -1,30 +1,61 @@
 var map = "";
 var iconFeatures = [];
 
+var lon = -0.240065;
+var lat = 51.445687;
+var zoom = 16;
+var scale = 0.1;
+var firstUpdate = true;
+
 var vectorSource = new ol.source.Vector({
 	  features: iconFeatures
 });
 	
 function loadStuff()
 	{
-			/*http://macdud-001-site1.itempurl.com/api/*/
+			// http://macdud-001-site1.itempurl.com/api/WebApp/GetBeacons/
+			// http://webapi.local.com/api/WebApp/GetBeacons/
 			$.ajax({
-			url: "http://macdud-001-site1.itempurl.com/api/WebApp/GetResults",
+			url: "http://macdud-001-site1.itempurl.com/api/WebApp/GetBeacons/",
 			cache: false,
 			async: true,
 			crossDomain: true,
+			data: { maxGet : 5, longitude : lon.toString(), latitude: lat.toString(), range : '15.4', category: 0, forceUpdate: firstUpdate}, 
             dataType: 'jsonp',
+			timeout: 120000,
 			callback: jCallback(),
 			success: function(data){
-			  //console.log( "Load was performed. " + data );
-			  $(".someText").append("<p>Load was performed. " + data.message + "</p>");
-					//loadStuff();
+			  console.log( "Load was performed. " + data + " " + data.mapObjects[0].Icon);
+			  firstUpdate = false;
+			  
+			  //clear old data
+			  iconFeatures = [];
+			  vectorSource.clear();
+	
+			  // load player data
+			  	
+			var iconData = {title:'Maciej Dudzinski', text: 'Good lad'};
+			addIcon(iconData,lon, lat, 0.1, 'logo.png');
+	
+			  $.each( data.mapObjects, function(  key, value ){
+					 addObject(value.Longitude,value.Latitude,value.Icon,value.Title,value.Description);
+				});
+			 
+			  
+			     $(".someText").append("<p>Load was performed. " + data.message + "</p>");
+			     loadStuff();
 				}
 			,error: function(xhr, status, error)
 			{
-				//console.log( "Error");
-				 $(".someText").append("<p>Error" + xhr + " / " + status + " / " + error + "</p>");
-				
+				if(status === 'timeout')
+				{
+					//xhr.abort()
+					loadStuff();
+				}
+				else
+				{	xhr.abort()
+					console.log( "Error: " + xhr + " / " + status + " / " + error);
+				}
 			}
 			});
 	}
@@ -35,13 +66,7 @@ function jCallback(data)
 };
 
 function loadMap()
-{
-	 var lon = -0.240065;
-	 var lat = 51.445687;
-	 var zoom = 16;
-	 var scale = 0.1;
-	 
-
+{	 
 	var vectorLayer = new ol.layer.Vector({
 	  source: vectorSource
 	});
@@ -70,7 +95,7 @@ function loadMap()
 	addIcon(iconData,lon, lat, 0.1, 'logo.png');
 	
 	
-	  addPopup();
+	  clickEvents();
 	  	
 		
       document.getElementById('zoom-out').onclick = function() {
@@ -112,8 +137,30 @@ function addIcon(data,lon, lat, scale, type)
 		opacity: 0.75,
 		scale : scale,
 		src: 'img/' + type
-	  }))
+	  })),
+	  text: new ol.style.Text({
+                        textAlign: "Start",
+                        textBaseline: "Middle",
+                        font: 'Normal 12px Arial',
+                        text: data.title,
+                        fill: new ol.style.Fill({
+                            color: '#ffa500'
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: '#000000',
+                            width: 3
+                        }),
+                        offsetX: -1 * data.title.length,
+                        offsetY: -1 * data.title.length,
+                        rotation: 0
+                    })
+	  
 	});
+	
+	iconStyle.Text = new ol.style.Text({}
+	
+	
+	);
 
 	iconFeature.setStyle(iconStyle);
 	
@@ -124,7 +171,15 @@ function addIcon(data,lon, lat, scale, type)
 
 }
 
-function addPopup()
+function addObject(lo,la,icon,title_val,text_val)
+{
+			var coord = ol.proj.transform([lo, la], 'EPSG:3857', 'EPSG:4326');
+			console.log(lo + " " + la );
+			var data = {title : title_val, text : text_val};
+			addIcon(data,lo, la, 0.3, icon);
+}
+
+function clickEvents()
 {
 	// display popup on click
 	map.on('click', function(evt) {
@@ -135,15 +190,13 @@ function addPopup()
 		   });
 	   if (feature) {
 		 var data = feature.get('oData');
-		 showModal(data);
+		 showPanel(data);
 		 
 	   } else {
 			var coord = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-			var lon = coord[0];
-			var lat = coord[1];
-			console.log(lon + " " + lat );
-			var data = {title : 'Fire !!!', text : 'some text'};
-			addIcon(data,lon, lat + 0.0001, 0.05, 'fire.png');
+			var lo = coord[0];
+			var la = coord[1];
+			//addObject(lo,la,'fire.png');
 	   }
 	});
 
@@ -160,27 +213,23 @@ function addPopup()
 	 });
 }
 
-function showModal(data)
+function showPanel(data)
 {
-	var modal = document.getElementById('myModal');
-	$('.modal-title').html(data.title);
-	$('.modal-text').html(data.text);
-	modal.style.display = "block";
+	$("#myPanel").panel("open");
+	$('.panel-title').html(data.title);
+	$('.panel-text').html(data.text);
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-		modal.style.display = "none";
-	}
-
+	// $('#closePanel').onclick = function()
+	// {
+		// $('#myPanel').panel("close");
+	// }
+	
 	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
+	// window.onclick = function(event) {
+		// if (event.target == modal) {
+			// modal.style.display = "none";
+		// }
+	// }
 	
 }
 		

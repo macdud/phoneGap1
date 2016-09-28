@@ -15,9 +15,29 @@
 <script src="http://openlayers.org/en/v3.18.2/build/ol.js"></script>
 <script src="js/main.js"></script>
 
-<div class='header'><h1>Home</h1></div>
+<div data-role="page">
 
-<a class="skiplink" href="#map">Go to map</a>
+<div data-role="panel" data-position="left" data-dispay="overlay" id="myPanel">
+    <div class="ui-panel-inner">
+	<h3 class="panel-title"></h3>
+	<p class="panel-text"></p>
+	<a href="#" id="closePanel" onclick="$('#myPanel').panel('close');" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+	</div>
+</div><!-- /panel -->
+
+<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
+<div data-role="popup" id="popupMenu" data-theme="b"><ul data-role="listview" data-inset="true" style="min-width:210px;">
+<li data-role="list-divider">Choose an action</li>
+<li><a href="#">View details</a></li>
+<li><a href="#">Edit</a></li>
+<li><a href="#">Disable</a></li>
+<li><a href="#">Delete</a></li>
+</ul>
+</div>
+
+<!-- header -->
+<div class='header'><h1>Home</h1></div>
+<!-- content -->
 <div id="map" class="map" tabindex="0" style="width:95%;height:500px;margin-left:auto;margin-right:auto;"></div>
 
 <button id="zoom-out">Zoom out</button>
@@ -25,10 +45,17 @@
 
 <div class="someText"></div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+<!-- footer -->
 
-  <!-- Modal content -->
+</div><!-- page -->
+
+
+
+
+
+<!-- The Modal -->
+<!-- <div id="myModal" class="modal">
+
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">X</span>
@@ -38,28 +65,10 @@
       <p class='modal-text'></p>
     </div>
     <div class="modal-footer">
-     <!--  <h3>Modal Footer</h3> -->
     </div>
   </div>
 
-</div>
-
-	  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
+</div> -->
 
 </div>
 
